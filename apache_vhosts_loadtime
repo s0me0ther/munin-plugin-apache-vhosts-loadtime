@@ -56,7 +56,7 @@ if ($config) {
 	foreach ($hosts as $host) {
 		$lines[] = "site{$key}.label {$host}";
 		$lines[] = "site{$key}.info Page loadtime for {$host}";
-		$lines[] = "site{$key}.draw LINE2";
+		$lines[] = "site{$key}.draw LINE1";
 		$lines[] = "site{$key}_statuscode.label {$host} status code";
 		$lines[] = "site{$key}_statuscode.graph no";
 
