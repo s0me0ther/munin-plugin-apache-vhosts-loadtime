@@ -54,11 +54,12 @@ if ($config) {
 	// add each host
 	$key = 0;
 	foreach ($hosts as $host) {
-		$lines[] = "site{$key}.label {$host}";
-		$lines[] = "site{$key}.info Page loadtime for {$host}";
-		$lines[] = "site{$key}.draw LINE1";
-		$lines[] = "site{$key}_statuscode.label {$host} status code";
-		$lines[] = "site{$key}_statuscode.graph no";
+		$internalName = md5($host);
+		$lines[] = "{$internalName}.label {$host}";
+		$lines[] = "{$internalName}.info Page loadtime for {$host}";
+		$lines[] = "{$internalName}.draw LINE1";
+		$lines[] = "{$internalName}_statuscode.label {$host} status code";
+		$lines[] = "{$internalName}_statuscode.graph no";
 
 		$key++;
 	}
@@ -121,8 +122,9 @@ curl_multi_close($curlMulti);
 $lines = [];
 $key = 0;
 foreach ($curlResults as $host => $result) {
-	$lines[] = "site{$key}.value {$result['total_time']}";
-	$lines[] = "site{$key}_statuscode.value {$result['http_code']}";
+	$internalName = md5($host);
+	$lines[] = "{$internalName}.value {$result['total_time']}";
+	$lines[] = "{$internalName}_statuscode.value {$result['http_code']}";
 	$key++;
 }
 
